@@ -1,8 +1,5 @@
 package ui;
 
-import model.Board;
-import model.Space;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -33,69 +30,69 @@ public class GridBoard {
         return 0;
     }
 
-    public static void displayGrid(){
+    public static void displayGrid() {
         int top = screenLine.length * screenLine.length;
-        boolean r = top % 2 == 0;
+        boolean direction = top % 2 == 0;
         int aux = top;
         for (int i = 0; i < screenLine.length; i++) {
             int j = 0;
-            if (r) {
+            if (direction) {
                 while (j < screenLine.length) {
                     matrix[i][j] = String.valueOf(aux--);
                     j++;
                 }
-                r = false;
+                direction = false;
             } else {
-                aux -= screenLine.length - 1;
+                aux -= screenLine.length - 1;//9-2 = 7
                 int temp = aux;
                 while (j < screenLine.length) {
                     matrix[i][j] = String.valueOf(aux++);
                     j++;
                 }
-                aux = temp - 1;
-                r = true;
+                aux = temp - 1; // 7 - 1 = 6
+                direction = true;
             }
             //System.out.println(martix);
         }
-        for (Character c:symbolPlayer) {
-            matrix[screenLine.length-1][0] += c;
+        for (Character c : symbolPlayer) {
+            matrix[screenLine.length - 1][0] += c;
         }
-        for (int i = 0; i < snakes.size(); i+=2) {
+        for (int i = 0; i < snakes.size(); i += 2) {
             double a = Double.parseDouble(String.valueOf(snakes.get(i))) / Double.parseDouble(String.valueOf(screenLine.length));
             int x = (int) Math.floor(a - 0.1);
             x = screenLine.length - 1 - x;
             for (int j = 0; j < screenLine.length; j++) {
                 if (matrix[x][j].contains(snakes.get(i).toString())) {
-                    matrix[x][j] += "S"+snakes.get(i)+"H";
+                    matrix[x][j] += "S" + snakes.get(i) + "H";
                     break;
                 }
             }
-            a = Double.parseDouble(String.valueOf(snakes.get(i+1))) / Double.parseDouble(String.valueOf(screenLine.length));
+            a = Double.parseDouble(String.valueOf(snakes.get(i + 1))) / Double.parseDouble(String.valueOf(screenLine.length));
             x = (int) Math.floor(a - 0.1);
             x = screenLine.length - 1 - x;
             for (int j = 0; j < screenLine.length; j++) {
-                if (matrix[x][j].contains(snakes.get(i+1).toString())) {
-                    matrix[x][j] += "S"+snakes.get(i)+"T";
+                if (matrix[x][j].contains(snakes.get(i + 1).toString())) {
+                    matrix[x][j] += "S" + snakes.get(i) + "T";
                     break;
                 }
             }
         }
-        for (int i = 0; i < ladders.size(); i+=2) {
+        for (int i = 0; i < ladders.size(); i += 2) {
             double a = Double.parseDouble(String.valueOf(ladders.get(i))) / Double.parseDouble(String.valueOf(screenLine.length));
             int x = (int) Math.floor(a - 0.1);
             x = screenLine.length - 1 - x;
             for (int j = 0; j < screenLine.length; j++) {
                 if (matrix[x][j].contains(ladders.get(i).toString())) {
-                    matrix[x][j] += "L"+ladders.get(i)+"T";
+                    matrix[x][j] += "L" + ladders.get(i) + "T";
                     break;
                 }
             }
-            a = Double.parseDouble(String.valueOf(ladders.get(i+1))) / Double.parseDouble(String.valueOf(screenLine.length));
+            a = Double.parseDouble(String.valueOf(ladders.get(i + 1))) / Double.parseDouble(String.valueOf(screenLine.length));
             x = (int) Math.floor(a - 0.1);
             x = screenLine.length - 1 - x;
             for (int j = 0; j < screenLine.length; j++) {
-                if (matrix[x][j].contains(ladders.get(i+1).toString())) {
-                    matrix[x][j] += "L"+ladders.get(i)+"B";
+                if (matrix[x][j].contains(ladders.get(i + 1).toString())) {
+                    matrix[x][j] += "L" + ladders.get(i) + "B";
                     break;
                 }
             }
@@ -103,10 +100,30 @@ public class GridBoard {
         soutMatrix();
     }
 
-    private static void soutMatrix() {
-        for (String[] row:matrix) {
+    public String findSpace(int n) {
+
+        for (int i = 0; i < screenLine.length; i++) {
+            for (int j = 0; j < screenLine.length; j++) {
+                if (Integer.parseInt(matrix[i][j]) == n) {
+                    return i + "-" + j;
+                }
+            }
+        }
+        return "";
+    }
+    
+    private void expressIdentity(){
+        for (int i = 0; i < ; i++) {
+            
+        }
+    }
+    
+    
+    private static void soutMatrix () {
+        for (String[] row : matrix) {
             System.out.println(Arrays.toString(row));
         }
         System.out.println();
     }
 }
+    

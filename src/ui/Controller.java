@@ -79,7 +79,7 @@ public class Controller {
         ArrayList<Character> tempPlayers = new ArrayList<>();
         int size = cl.getSizeBoard();
         int availableSpaces = size*size;
-        for (int i = 2; i < availableSpaces; i++) {
+        for (int i = 0; i < availableSpaces; i++) {
             if (cl.hasSnake(i)) {
                 tempSnakes.add(i);
                 tempSnakes.add(cl.getTailSnake(i));
